@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
 import { searchGithub } from '../api/API';
 import ErrorPage from './ErrorPage';
+import { Candidate } from '../interfaces/Candidate.interface'; 
 
 const CandidateSearch = () => {
-  const [candidate, setCandidate] = useState<any | null>(null);
+  const [candidate, setCandidate] = useState<Candidate | null>(null);
   const [savedCandidates, setSavedCandidates] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);

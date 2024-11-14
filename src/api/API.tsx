@@ -1,4 +1,6 @@
-const searchGithub = async () => {
+import { Candidate } from '../interfaces/Candidate.interface';
+
+const searchGithub = async (): Promise<Candidate[]> => {
   try {
     // const start = Math.floor(Math.random() * 100000000) + 1;
     const start = "1"
@@ -17,14 +19,14 @@ const searchGithub = async () => {
       throw new Error('invalid API response, check the network tab');
     }
     // console.log('Data:', data);
-    return data;
+    return data as Candidate[];
   } catch (err) {
-    // console.log('an error occurred', err);
+    console.log('an error occurred', err);
     return [];
   }
 };
 
-const searchGithubUser = async (username: string) => {
+const searchGithubUser = async (username: string): Promise<Candidate> => {
   try {
     const response = await fetch(`https://api.github.com/users/${username}`, {
       headers: {
@@ -35,10 +37,10 @@ const searchGithubUser = async (username: string) => {
     if (!response.ok) {
       throw new Error('invalid API response, check the network tab');
     }
-    return data;
+    return data as Candidate;
   } catch (err) {
-    // console.log('an error occurred', err);
-    return {};
+    console.log('an error occurred', err);
+    return {} as Candidate;
   }
 };
 
