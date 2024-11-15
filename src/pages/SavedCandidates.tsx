@@ -18,29 +18,26 @@ const SavedCandidates = () => {
       {savedCandidates.length > 0 ? (
         <ul>
           {savedCandidates.map((candidate) => (
-            <li key={candidate.login} style={{ marginBottom: '20px' }}>
+            <li key={candidate.name} style={{ marginBottom: '20px' }}>
               <img
                 src={candidate.avatar_url}
-                alt={`${candidate.login}'s avatar`}
+                alt={`${candidate.name}'s avatar`}
                 style={{ width: '50px', height: '50px', borderRadius: '50%' }}
               />
               <p>
-                <strong>Name:</strong> {candidate.name || 'N/A'}
+                <strong>Name:</strong> {candidate.name}
               </p>
               <p>
-                <strong>Username:</strong> {candidate.login}
+                <strong>Location:</strong> {candidate.location}
               </p>
               <p>
-                <strong>Location:</strong> {candidate.location || 'N/A'}
+                <strong>Email:</strong> {candidate.email}
               </p>
               <p>
-                <strong>Company:</strong> {candidate.company || 'N/A'}
+                <strong>Company:</strong> {candidate.company}
               </p>
               <p>
-                <strong>GitHub Profile:</strong>{' '}
-                <a href={candidate.html_url} target="_blank" rel="noopener noreferrer">
-                  {candidate.html_url}
-                </a>
+                <strong>Bio:</strong>{candidate.bio}
               </p>
             </li>
           ))}

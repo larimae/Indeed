@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { searchGithub } from '../api/API';
+import { searchGithub, searchGithubUser } from '../api/API';
 import ErrorPage from './ErrorPage';
 import { Candidate } from '../interfaces/Candidate.interface'; 
 
@@ -18,8 +18,10 @@ const CandidateSearch = () => {
     setError(false);
     try {
       const users = await searchGithub();
+      console.log(users[0].login)
       if (users.length > 0) {
-        setCandidate(users[0]); // Select the first candidate
+        const detailedCandidate = await searchGithubUser(users[0].login);
+        setCandidate(detailedCandidate);
       } else {
         setCandidate(null); // No more candidates
       }
@@ -57,12 +59,10 @@ const CandidateSearch = () => {
         <div>
           <img src={candidate.avatar_url} alt={`${candidate.name}'s avatar`} />
           <p>Name: {candidate.name}</p>
-          <p>Username: {candidate.login}</p>
           <p>Location: {candidate.location}</p>
+          <p>Email: {candidate.email}</p>
           <p>Company: {candidate.company}</p>
-          <p>
-            GitHub Profile: <a href={candidate.html_url}>{candidate.html_url}</a>
-          </p>
+          <p>Bio: {candidate.bio}</p>
           <button onClick={saveCandidate}>+</button>
           <button onClick={rejectCandidate}>-</button>
         </div>
