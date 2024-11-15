@@ -20,7 +20,9 @@ const CandidateSearch = () => {
       const users = await searchGithub();
       console.log(users[0].login)
       if (users.length > 0) {
-        const detailedCandidate = await searchGithubUser(users[0].login);
+        const random = Math.floor(Math.random()* users.length)
+        const detailedCandidate = await searchGithubUser(users[random].login);
+        console.log(detailedCandidate)
         setCandidate(detailedCandidate);
       } else {
         setCandidate(null); // No more candidates
