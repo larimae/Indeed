@@ -16,37 +16,44 @@ const SavedCandidates = () => {
     <div>
       <h1>Potential Candidates</h1>
       {savedCandidates.length > 0 ? (
-        <ul>
-          {savedCandidates.map((candidate) => (
-            <li key={candidate.name} style={{ marginBottom: '20px' }}>
-              <img
-                src={candidate.avatar_url}
-                alt={`${candidate.name}'s avatar`}
-                style={{ width: '50px', height: '50px', borderRadius: '50%' }}
-              />
-              <p>
-                <strong>Name:</strong> {candidate.name}
-              </p>
-              <p>
-                <strong>Location:</strong> {candidate.location}
-              </p>
-              <p>
-                <strong>Email:</strong> {candidate.email}
-              </p>
-              <p>
-                <strong>Company:</strong> {candidate.company}
-              </p>
-              <p>
-                <strong>Bio:</strong>{candidate.bio}
-              </p>
-            </li>
-          ))}
-        </ul>
+        <table className="table">
+          <thead>
+            <tr>
+              <th>Image</th>
+              <th>Name</th>
+              <th>Location</th>
+              <th>Email</th>
+              <th>Company</th>
+              <th>Bio</th>
+              <th>Reject</th>
+            </tr>
+          </thead>
+          <tbody>
+            {savedCandidates.map((candidate, index) => (
+              <tr key={index}>
+                <td>
+                  <img
+                    src={candidate.avatar_url}
+                    alt={`${candidate.name}'s avatar`}
+                  />
+                </td>
+                <td>{candidate.name} ({candidate.login})</td>
+                <td>{candidate.location || 'N/A'}</td>
+                <td>{candidate.email || 'N/A'}</td>
+                <td>{candidate.company || 'N/A'}</td>
+                <td>{candidate.bio || 'N/A'}</td>
+                <td>
+                  <button className="reject-btn">-</button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       ) : (
         <p>No saved candidates yet.</p>
       )}
     </div>
-  );
-};
+  );  
+}
 
 export default SavedCandidates;
