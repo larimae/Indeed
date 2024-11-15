@@ -58,15 +58,17 @@ const CandidateSearch = () => {
   {loading ? (
         <p>Loading candidate...</p>
       ) : candidate ? (
-        <div>
+        <div className="card">
           <img src={candidate.avatar_url} alt={`${candidate.name}'s avatar`} />
-          <p>Name: {candidate.name}</p>
-          <p>Location: {candidate.location}</p>
-          <p>Email: {candidate.email}</p>
-          <p>Company: {candidate.company}</p>
-          <p>Bio: {candidate.bio}</p>
-          <button onClick={saveCandidate}>+</button>
-          <button onClick={rejectCandidate}>-</button>
+          <h2>{candidate.name} ({candidate.login})</h2>
+          <p><strong>Location:</strong> {candidate.location || 'N/A'}</p>
+          <p><strong>Email:</strong> {candidate.email || 'N/A'}</p>
+          <p><strong>Company:</strong> {candidate.company || 'N/A'}</p>
+          <p><strong>Bio:</strong> {candidate.bio || 'N/A'}</p>
+          <div className="buttons">
+            <button onClick={saveCandidate}>+</button>
+            <button onClick={rejectCandidate}>-</button>
+          </div>
         </div>
       ) : (
         <p>No more candidates available</p>
